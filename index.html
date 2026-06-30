@@ -5,202 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laure & Alex</title>
 
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap');
-
-:root {
-    --green: #6b7f6a;
-    --green-dark: #2f3b2f;
-    --cream: #f7f5f0;
-    --shadow: 0 20px 60px rgba(0,0,0,0.08);
-    --radius: 22px;
-}
-
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--cream);
-    color: var(--green-dark);
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
-/* NAV */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(14px);
-    z-index: 1000;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    padding: 15px;
-    margin: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--green-dark);
-    font-weight: 500;
-}
-
-/* HERO */
-.hero {
-    height: 100vh;
-    background: url("images/couple.jpg") center/cover no-repeat;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
-}
-
-.hero-content {
-    position: relative;
-    color: white;
-}
-
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 60px;
-    margin: 0;
-}
-
-.btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border-radius: 50px;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-}
-
-/* SECTIONS */
-.section {
-    padding: 100px 20px;
-    max-width: 1000px;
-    margin: auto;
-    opacity: 0;
-    transform: translateY(40px);
-    filter: blur(6px);
-    transition: 0.9s ease;
-}
-
-.section.visible {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-}
-
-.card {
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(10px);
-    padding: 35px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-
-/* COUNTDOWN */
-.countdown {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.countdown strong {
-    font-size: 28px;
-    color: var(--green);
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-}
-
-.mini-card {
-    background: white;
-    padding: 25px;
-    border-radius: 18px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.mini-card:hover {
-    transform: scale(1.03);
-}
-
-/* RSVP */
-.rsvp-open-btn {
-    padding: 14px 28px;
-    border: none;
-    border-radius: 50px;
-    background: var(--green);
-    color: white;
-    cursor: pointer;
-}
-
-/* POPUP */
-.rsvp-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-.rsvp-popup.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.rsvp-box {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 500px;
-    transform: scale(0.9);
-    transition: 0.3s;
-}
-
-.rsvp-popup.active .rsvp-box {
-    transform: scale(1);
-}
-
-.rsvp-close {
-    float: right;
-    cursor: pointer;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 70px;
-    background: #e9ece6;
-}
-
+   <style>
 .faq-item {
     margin-bottom: 12px;
     border-radius: 14px;
@@ -234,89 +39,519 @@ footer {
     max-height: 200px;
     padding: 0 16px 16px 16px;
 }
-    </style>
+
+/* overlay plus doux + cinematic */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.65)
+    );
+}
+
+/* animation du texte */
+.hero-anim h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1.2s ease forwards;
+}
+
+.hero-anim p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 0.4s;
+}
+
+.hero-anim .subtitle {
+    animation-delay: 0.7s;
+}
+
+.hero-anim .btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 1s;
+}
+
+/* animation clé */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* léger zoom lent de l’image (effet film) */
+.hero {
+    animation: zoomHero 12s ease-out forwards;
+}
+
+@keyframes zoomHero {
+    from {
+        background-size: 100%;
+    }
+    to {
+        background-size: 110%;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    --green: #6b7f6a;
+    --green-dark: #2f3b2f;
+    --cream: #f7f5f0;
+    --white: #ffffff;
+    --shadow: 0 20px 60px rgba(0,0,0,0.08);
+    --radius: 22px;
+}
+
+/* BASE */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--green-dark);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(14px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 16px;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--green-dark);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: url("images/couple.jpg") center center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* overlay premium */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.55)
+    );
+}
+
+.hero-content {
+    position: relative;
+    color: white;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.btn {
+    margin-top: 25px;
+    display: inline-block;
+    padding: 12px 26px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.25);
+}
+
+/* SECTIONS */
+.section {
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(6px);
+    transition: all 0.9s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* CARD PREMIUM */
+.card {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.6);
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* TITRES */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+/* HISTOIRE */
+.card p {
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+/* COUNTDOWN */
+.countdown {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.countdown div {
+    flex: 1;
+    padding: 10px;
+}
+
+.countdown strong {
+    font-size: 28px;
+    color: var(--green);
+    display: block;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* MINI CARDS */
+.mini-card {
+    background: rgba(255,255,255,0.9);
+    padding: 26px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.mini-card:hover {
+    transform: translateY(-6px);
+    background: white;
+}
+.mini-card {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mini-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 80px 20px;
+    background: #e9ece6;
+    font-size: 16px;
+}
+
+/* ANIMATIONS (scroll reveal simple) */
+.section {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s forwards;
+}
+
+.section:nth-child(odd) { animation-delay: 0.2s; }
+.section:nth-child(even) { animation-delay: 0.4s; }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .countdown {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+}
+
+.rsvp-card {
+    text-align: center;
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    outline: none;
+    background: rgba(255,255,255,0.8);
+    transition: 0.3s;
+}
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(107,127,106,0.15);
+}
+
+.rsvp-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.rsvp-form button {
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.rsvp-form button:hover {
+    transform: translateY(-2px);
+    background: #5f735e;
+}
+
+/* bouton RSVP */
+.rsvp-open-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.rsvp-open-btn:hover {
+    transform: translateY(-2px);
+    background: #5f735e;
+}
+
+/* POPUP */
+.rsvp-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 2000;
+}
+
+.rsvp-popup.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.rsvp-box {
+    background: white;
+    padding: 35px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 520px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+
+    transform: scale(0.85);
+    opacity: 0;
+    transition: all 0.35s ease;
+}
+
+.rsvp-popup.active .rsvp-box {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.rsvp-close {
+    float: right;
+    cursor: pointer;
+    font-size: 22px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.rsvp-close:hover {
+    opacity: 1;
+}
+</style>
 </head>
 
 <body>
 
 <!-- NAV -->
 <nav>
-<ul>
-<li><a href="#histoire">Histoire</a></li>
-<li><a href="#compte">Compte</a></li>
-<li><a href="#jour">Jour J</a></li>
-<li><a href="#rsvp">RSVP</a></li>
-<li><a href="#faq">FAQ</a></li>
-</ul>
+    <ul>
+        <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#compte">Compte à rebours</a></li>
+        <li><a href="#jour">Le grand jour</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="#faq">FAQ</a></li>
+    </ul>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-<div class="hero-content">
-<h1>Laure & Alex</h1>
-<p>23 octobre 2027</p>
-<a class="btn" href="#histoire">Découvrir</a>
-</div>
-</div>
-
-<!-- HISTOIRE -->
+    <div class="hero-content hero-anim">
+        <h1>Laure & Alex</h1>
+        <p>23 octobre 2027</p>
+        <p class="subtitle">Une journée remplie d’amour, de rires et de souvenirs…</p>
+        <a class="btn" href="#histoire">Découvrir</a>
+    </div>
+</div><!-- HISTOIRE -->
 <div class="section" id="histoire">
-<div class="card">
-<h2>💚 Notre histoire</h2>
-<p>Tout a commencé par une rencontre simple, presque évidente.<br><br>
-
-Puis sont venus les rires, les projets, les voyages, les moments du quotidien… et une vie à construire à deux.<br><br>
-
-Aujourd’hui, entourés de nos trois chats 🐱🐱🐱, on s’est rendu compte d’une chose essentielle :<br><br>
-
-<strong>on veut continuer cette histoire ensemble, pour toujours.</strong>
-</p>
-</div>
+    <div class="card">
+        <h2>💚 Notre histoire</h2>
+        <p>
+            Tout a commencé par une rencontre…<br><br>
+            Puis des fous rires, des voyages, des projets, trois chats adorables 🐱🐱🐱 et aujourd’hui une évidence :<br><br>
+            <strong>se dire Oui.</strong>
+        </p>
+    </div>
 </div>
 
-<!-- COMPTE -->
+<!-- COMPTE À REBOURS -->
 <div class="section" id="compte">
-<div class="card">
-<h2>⏳ Compte à rebours</h2>
+    <div class="card">
+        <h2>⏳ Compte à rebours</h2>
 
-<div class="countdown">
-<div><strong id="days">0</strong><br>jours</div>
-<div><strong id="hours">0</strong><br>heures</div>
-<div><strong id="minutes">0</strong><br>min</div>
-<div><strong id="seconds">0</strong><br>sec</div>
+      <div class="countdown">
+    <div><strong id="days">0</strong><br>jours</div>
+    <div><strong id="hours">0</strong><br>heures</div>
+    <div><strong id="minutes">0</strong><br>minutes</div>
+    <div><strong id="seconds">0</strong><br>secondes</div>
 </div>
 
-</div>
-</div>
-
-<!-- JOUR J -->
+<!-- GRAND JOUR -->
 <div class="section" id="jour">
-<div class="card">
-<h2>📅 Le grand jour</h2>
+    <div class="card">
+        <h2>📅 Le grand jour</h2>
 
-<div class="grid">
-<div class="mini-card" onclick="openCard('programme')">🌿Programe
-</div>
-<div class="mini-card" onclick="openCard('bars')">🍸 Bars</div>
-<div class="mini-card" onclick="openCard('lieu')">📍 Lieu</div>
-<div class="mini-card" onclick="openCard('infos')">🎁 Infos</div>
-</div>
+        <div class="grid">
 
-</div>
+            <div class="mini-card" onclick="openCard('programme')">
+                🌿 Programme
+            </div>
+
+            <div class="mini-card" onclick="openCard('bars')">
+                🍸 Les bars
+            </div>
+
+            <div class="mini-card" onclick="openCard('lieu')">
+                📍 Lieu
+            </div>
+
+            <div class="mini-card" onclick="openCard('infos')">
+                🎁 Infos pratiques
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <!-- RSVP -->
 <div class="section" id="rsvp">
-<div class="card" style="text-align:center;">
-<h2>💌 RSVP</h2>
-<button class="rsvp-open-btn">Votre présence compte énormément pour nous.<br>
-Merci de nous dire si vous serez avec nous pour célébrer cette journée 💚</button>
-</div>
+    <div class="card" style="text-align:center;">
+        <h2>💌 RSVP</h2>
+        <p>Nous avons hâte de vous compter parmi nous 💚</p>
+
+        <button class="rsvp-open-btn">Je confirme ma présence</button>
+    </div>
 </div>
 
 <!-- FAQ -->
 <div class="section" id="faq">
-<div class="card">
+    <div class="card">
 <h2>❓ FAQ</h2>
 
 <div class="faq-item">
@@ -356,91 +591,193 @@ Merci de nous dire si vous serez avec nous pour célébrer cette journée 💚</
 
 </div>
 
-
-<!-- FOOTER -->
+<!-- FIN -->
 <footer>
-Laure & Alex 💚
+    <p>Merci de faire partie de cette aventure 💚</p>
+    <p>Laure & Alex</p>
 </footer>
+<script>
+function countdown() {
+    const weddingDate = new Date("2027-10-23T00:00:00").getTime();
 
-<!-- POPUP RSVP -->
+    const now = new Date().getTime();
+    const diff = weddingDate - now;
+
+    if (diff <= 0) return;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+countdown();
+setInterval(countdown, 1000);
+</script>
+
+<script>
+window.addEventListener("load", function () {
+
+    // COUNTDOWN 
+    function countdown() {
+        const weddingDate = new Date("2027-10-23T00:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+    }
+
+    countdown();
+    setInterval(countdown, 1000);
+
+    // ✨ APPLE STYLE SCROLL ANIMATION
+    const sections = document.querySelectorAll(".section");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+});
+
+</script>
+<script>
+document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    alert("Merci 💚 Votre réponse a bien été prise en compte !");
+    this.reset();
+});
+</script>
+
 <div class="rsvp-popup" id="rsvpPopup">
-<div class="rsvp-box">
-<span class="rsvp-close" id="closePopup">✕</span>
+    <div class="rsvp-box">
+        <span class="rsvp-close" id="closePopup">✕</span>
 
-<h2>RSVP</h2>
+        <h2>💌 RSVP</h2>
 
-<form class="rsvp-form">
-<input type="text" placeholder="Nom" required>
-<select required>
-<option>Présent</option>
-<option>Absent</option>
-</select>
-<button type="submit">Envoyer</button>
-</form>
+        <form class="rsvp-form">
+            <input type="text" placeholder="Nom & prénom" required>
 
-</div>
-</div>
+            <select required>
+                <option value="">Votre réponse</option>
+                <option>Je serai présent(e) 🎉</option>
+                <option>Je ne pourrai pas venir 💔</option>
+            </select>
+	    <input type="text" placeholder="Pointure de chaussure" required>
 
-<!-- POPUP INFO -->
-<div class="rsvp-popup" id="infoPopup">
-<div class="rsvp-box">
-<span class="rsvp-close" onclick="closeCard()">✕</span>
-<h2 id="popupTitle"></h2>
-<p id="popupText"></p>
-</div>
+            <textarea placeholder="Un petit mot 💚"></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
 </div>
 
 <script>
-// COUNTDOWN
-function countdown() {
-const d = new Date("2027-10-23").getTime();
-const n = new Date().getTime();
-const diff = d - n;
-
-document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24));
-document.getElementById("hours").innerText = Math.floor(diff / (1000*60*60)%24);
-document.getElementById("minutes").innerText = Math.floor(diff / (1000*60)%60);
-document.getElementById("seconds").innerText = Math.floor(diff / 1000 % 60);
-}
-setInterval(countdown,1000);
-countdown();
-
-// SCROLL
-const sections = document.querySelectorAll(".section");
-const observer = new IntersectionObserver((e)=>{
-e.forEach(x=>x.isIntersecting && x.target.classList.add("visible"));
-},{threshold:0.2});
-sections.forEach(s=>observer.observe(s));
-
-// RSVP
 const popup = document.getElementById("rsvpPopup");
-document.querySelector(".rsvp-open-btn").onclick=()=>popup.classList.add("active");
-document.getElementById("closePopup").onclick=()=>popup.classList.remove("active");
+const openBtn = document.querySelector(".rsvp-open-btn");
+const closeBtn = document.getElementById("closePopup");
 
-// CARDS
-function openCard(type){
-const p=document.getElementById("infoPopup");
-const t=document.getElementById("popupTitle");
-const x=document.getElementById("popupText");
+// ouvrir popup
+openBtn.addEventListener("click", () => {
+    popup.classList.add("active");
+    document.body.style.overflow = "hidden"; // bloque scroll
+});
 
-if(type=="programme"){t.innerText="Programme";x.innerText="Le déroulé de cette journée unique";}
-if(type=="bars"){t.innerText="Bars";x.innerText="Des espaces gourmands et festifs à découvrir tout au long de la journée";}
-if(type=="lieu"){t.innerText="Lieu";x.innerText="Le lieu est encore en cours de finalisation, mais nous avons hâte de vous y accueillir dans un cadre chaleureux et plein de charme 💚";}
-if(type=="infos"){t.innerText="Infos";x.innerText="Tout ce qu’il faut savoir pour profiter pleinement de cette journée avec nous";}
-
-p.classList.add("active");
-}
-function closeCard(){
-document.getElementById("infoPopup").classList.remove("active");
+// fermer popup
+function closePopup() {
+    popup.classList.remove("active");
+    document.body.style.overflow = "auto";
 }
 
-// RSVP submit
-document.querySelector(".rsvp-form").addEventListener("submit",e=>{
-e.preventDefault();
-alert("Merci 💚");
-popup.classList.remove("active");
+closeBtn.addEventListener("click", closePopup);
+
+// clic dehors
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+        closePopup();
+    }
+});
+
+// submit formulaire
+document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    alert("Merci 💚 Votre réponse a bien été enregistrée !");
+    
+    this.reset();
+    closePopup();
 });
 </script>
+
+<div class="rsvp-popup" id="infoPopup">
+    <div class="rsvp-box">
+        <span class="rsvp-close" onclick="closeCard()">✕</span>
+
+        <h2 id="popupTitle">Titre</h2>
+        <p id="popupText">Contenu</p>
+    </div>
+</div>
+
+
+<script>
+function openCard(type) {
+    const popup = document.getElementById("infoPopup");
+    const title = document.getElementById("popupTitle");
+    const text = document.getElementById("popupText");
+
+    if (type === "programme") {
+        title.innerText = "🌿 Programme";
+        text.innerText = "Arrivée des invités, cérémonie, cocktail, soirée…";
+    }
+
+    if (type === "bars") {
+        title.innerText = "🍸 Les bars";
+        text.innerText = "Des espaces gourmands et festifs à découvrir tout au long de la journée!";
+    }
+
+    if (type === "lieu") {
+        title.innerText = "📍 Lieu";
+        text.innerText = "Le lieu est encore en cours de finalisation, mais nous avons hâte de vous y accueillir dans un cadre chaleureux et plein de charme.💚";
+    }
+
+    if (type === "infos") {
+        title.innerText = "🎁 Infos pratiques";
+        text.innerText = "Tout ce qu’il faut savoir pour profiter pleinement de cette journée avec nous";
+    }
+
+    popup.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeCard() {
+    document.getElementById("infoPopup").classList.remove("active");
+    document.body.style.overflow = "auto";
+}
+</script>
+
 <script>
 document.querySelectorAll(".faq-question").forEach(btn => {
     btn.addEventListener("click", () => {
