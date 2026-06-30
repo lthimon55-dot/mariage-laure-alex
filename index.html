@@ -154,12 +154,23 @@ h2 {
 }
 
 /* COUNTDOWN */
-<div class="countdown">
-    <div><strong id="days">0</strong><br>jours</div>
-    <div><strong id="hours">0</strong><br>heures</div>
-    <div><strong id="minutes">0</strong><br>minutes</div>
-    <div><strong id="seconds">0</strong><br>secondes</div>
-</div>
+.countdown {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.countdown div {
+    flex: 1;
+}
+
+.countdown strong {
+    font-size: 28px;
+    color: var(--green);
+    display: block;
+}
 
 /* GRID */
 .grid {
@@ -225,6 +236,133 @@ footer {
         gap: 14px;
     }
 }
+.section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.rsvp-card {
+    text-align: center;
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    outline: none;
+    background: rgba(255,255,255,0.8);
+    transition: 0.3s;
+}
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(107,127,106,0.15);
+}
+
+.rsvp-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.rsvp-form button {
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.rsvp-form button:hover {
+    transform: translateY(-2px);
+    background: #5f735e;
+}
+/* bouton RSVP */
+.rsvp-open-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.rsvp-open-btn:hover {
+    transform: translateY(-2px);
+    background: #5f735e;
+}
+
+/* POPUP */
+.rsvp-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 2000;
+}
+
+.rsvp-popup.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.rsvp-box {
+    background: white;
+    padding: 35px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 520px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+
+    transform: scale(0.85);
+    opacity: 0;
+    transition: all 0.35s ease;
+}
+
+.rsvp-popup.active .rsvp-box {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.rsvp-close {
+    float: right;
+    cursor: pointer;
+    font-size: 22px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.rsvp-close:hover {
+    opacity: 1;
+}
 </style>
 </head>
 
@@ -247,7 +385,7 @@ footer {
         <h1>Laure & Alex</h1>
         <p>23 octobre 2027</p>
         <p>Une journée remplie d’amour, de rires et de souvenirs…</p>
-        <a class="btn" href="#histoire">Découvrir notre histoire</a>
+        <a class="btn" href="#histoire">Découvrir notre journée</a>
     </div>
 </div>
 
@@ -268,12 +406,12 @@ footer {
     <div class="card">
         <h2>⏳ Compte à rebours</h2>
 
-        <div class="countdown">
-            <div><strong>125</strong><br>jours</div>
-            <div><strong>14</strong><br>heures</div>
-            <div><strong>32</strong><br>minutes</div>
-            <div><strong>18</strong><br>secondes</div>
-        </div>
+     <div class="countdown">
+    <div><strong id="days">0</strong><br>jours</div>
+    <div><strong id="hours">0</strong><br>heures</div>
+    <div><strong id="minutes">0</strong><br>minutes</div>
+    <div><strong id="seconds">0</strong><br>secondes</div>
+</div>
     </div>
 </div>
 
@@ -295,25 +433,12 @@ footer {
 <div class="section" id="rsvp">
     <div class="card" style="text-align:center;">
         <h2>💌 RSVP</h2>
-        <a class="btn" href="rsvp.html">Je confirme ma présence</a>
+        <p>Nous avons hâte de vous compter parmi nous 💚</p>
+
+        <button class="rsvp-open-btn">Je confirme ma présence</button>
     </div>
 </div>
 
-<!-- FAQ -->
-<div class="section" id="faq">
-    <div class="card">
-        <h2>❓ FAQ</h2>
-
-        <p><strong>Comment s'habiller ?</strong><br>
-        Tenue chic et décontractée aux couleurs de l’automne.</p>
-
-        <p><strong>Puis-je venir avec mes enfants ?</strong><br>
-        Oui 💚</p>
-
-        <p><strong>Où dormir ?</strong><br>
-        Informations à venir.</p>
-    </div>
-</div>
 
 <!-- FIN -->
 <footer>
@@ -322,27 +447,136 @@ footer {
 </footer>
 
 <script>
-function countdown() {
-    const weddingDate = new Date("2027-10-23T00:00:00").getTime();
+window.addEventListener("load", function () {
 
-    const now = new Date().getTime();
-    const diff = weddingDate - now;
+    function countdown() {
+        const weddingDate = new Date("2027-10-23T00:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
 
-    if (diff <= 0) return;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+    }
 
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
+    countdown();
+    setInterval(countdown, 1000);
+
+});
+</script>
+
+<script>
+window.addEventListener("load", function () {
+
+    // COUNTDOWN (tu gardes le tien)
+    function countdown() {
+        const weddingDate = new Date("2027-10-23T00:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+    }
+
+    countdown();
+    setInterval(countdown, 1000);
+
+    // ✨ SCROLL ANIMATION
+    const sections = document.querySelectorAll(".section");
+
+    function revealOnScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+
+            if (sectionTop < triggerBottom) {
+                section.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll(); // activation au chargement
+
+});
+<script>
+document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    alert("Merci 💚 Votre réponse a bien été prise en compte !");
+    this.reset();
+});
+</script>
+<div class="rsvp-popup" id="rsvpPopup">
+    <div class="rsvp-box">
+        <span class="rsvp-close" id="closePopup">✕</span>
+
+        <h2>💌 RSVP</h2>
+
+        <form class="rsvp-form">
+            <input type="text" placeholder="Nom & prénom" required>
+
+            <select required>
+                <option value="">Votre réponse</option>
+                <option>Je serai présent(e) 🎉</option>
+                <option>Je ne pourrai pas venir 💔</option>
+            </select>
+
+            <textarea placeholder="Un petit mot 💚"></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+</div>
+<script>
+const popup = document.getElementById("rsvpPopup");
+const openBtn = document.querySelector(".rsvp-open-btn");
+const closeBtn = document.getElementById("closePopup");
+
+// ouvrir popup
+openBtn.addEventListener("click", () => {
+    popup.classList.add("active");
+    document.body.style.overflow = "hidden"; // bloque scroll
+});
+
+// fermer popup
+function closePopup() {
+    popup.classList.remove("active");
+    document.body.style.overflow = "auto";
 }
 
-countdown();
-setInterval(countdown, 1000);
+closeBtn.addEventListener("click", closePopup);
+
+// clic dehors
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+        closePopup();
+    }
+});
+
+// submit formulaire
+document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    alert("Merci 💚 Votre réponse a bien été enregistrée !");
+    
+    this.reset();
+    closePopup();
+});
 </script>
 
 </body>
