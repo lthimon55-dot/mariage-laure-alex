@@ -12,19 +12,17 @@
     --green: #6b7f6a;
     --green-dark: #2f3b2f;
     --cream: #f7f5f0;
-    --white: #ffffff;
     --shadow: 0 20px 60px rgba(0,0,0,0.08);
     --radius: 22px;
 }
 
-/* BASE */
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background: var(--cream);
     color: var(--green-dark);
-    scroll-behavior: smooth;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 /* NAV */
@@ -35,15 +33,14 @@ nav {
     background: rgba(255,255,255,0.6);
     backdrop-filter: blur(14px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 28px;
-    padding: 16px;
+    gap: 25px;
+    padding: 15px;
     margin: 0;
 }
 
@@ -51,80 +48,56 @@ nav a {
     text-decoration: none;
     color: var(--green-dark);
     font-weight: 500;
-    letter-spacing: 0.3px;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: var(--green);
 }
 
 /* HERO */
 .hero {
     height: 100vh;
-    background: url("images/couple.jpg") center center/cover no-repeat;
+    background: url("images/couple.jpg") center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
-/* overlay premium */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.6)
-    );
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
 }
 
 .hero-content {
     position: relative;
     color: white;
-    max-width: 700px;
-    padding: 20px;
 }
 
 .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 64px;
+    font-size: 60px;
     margin: 0;
-    letter-spacing: 1px;
-}
-
-.hero p {
-    font-size: 18px;
-    opacity: 0.9;
 }
 
 .btn {
-    margin-top: 25px;
-    display: inline-block;
-    padding: 12px 26px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: white;
+    margin-top: 20px;
+    padding: 12px 25px;
     border-radius: 50px;
+    background: rgba(255,255,255,0.15);
+    color: white;
     text-decoration: none;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    background: rgba(255,255,255,0.25);
+    display: inline-block;
 }
 
 /* SECTIONS */
 .section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: auto;
     opacity: 0;
     transform: translateY(40px);
-    filter: blur(8px);
-    transition: all 0.9s ease;
-    will-change: transform, opacity, filter;
+    filter: blur(6px);
+    transition: 0.9s ease;
 }
 
 .section.visible {
@@ -132,32 +105,13 @@ nav a:hover {
     transform: translateY(0);
     filter: blur(0);
 }
-/* CARD PREMIUM */
+
 .card {
     background: rgba(255,255,255,0.8);
     backdrop-filter: blur(10px);
-    padding: 40px;
+    padding: 35px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    border: 1px solid rgba(255,255,255,0.6);
-    transition: 0.4s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-/* TITRES */
-h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 34px;
-    margin-bottom: 20px;
-}
-
-/* HISTOIRE */
-.card p {
-    line-height: 1.7;
-    font-size: 17px;
 }
 
 /* COUNTDOWN */
@@ -166,160 +120,41 @@ h2 {
     justify-content: space-between;
     text-align: center;
     margin-top: 20px;
-    gap: 10px;
-}
-
-.countdown div {
-    flex: 1;
 }
 
 .countdown strong {
     font-size: 28px;
     color: var(--green);
-    display: block;
 }
 
 /* GRID */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
 }
 
-/* MINI CARDS */
 .mini-card {
-    background: rgba(255,255,255,0.9);
-    padding: 26px;
+    background: white;
+    padding: 25px;
     border-radius: 18px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    transition: 0.3s;
-    font-weight: 500;
-}
-
-.mini-card:hover {
-    transform: translateY(-6px);
-    background: white;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 80px 20px;
-    background: #e9ece6;
-    font-size: 16px;
-}
-
-/* ANIMATIONS (scroll reveal simple) */
-.section {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeIn 1s forwards;
-}
-
-.section:nth-child(odd) { animation-delay: 0.2s; }
-.section:nth-child(even) { animation-delay: 0.4s; }
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 42px;
-    }
-
-    .countdown {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    nav ul {
-        flex-wrap: wrap;
-        gap: 14px;
-    }
-}
-.section {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
-}
-
-.section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-.rsvp-card {
-    text-align: center;
-}
-
-.rsvp-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.rsvp-form input,
-.rsvp-form select,
-.rsvp-form textarea {
-    padding: 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(0,0,0,0.1);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    outline: none;
-    background: rgba(255,255,255,0.8);
-    transition: 0.3s;
-}
-
-.rsvp-form input:focus,
-.rsvp-form select:focus,
-.rsvp-form textarea:focus {
-    border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(107,127,106,0.15);
-}
-
-.rsvp-form textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.rsvp-form button {
-    padding: 14px;
-    border: none;
-    border-radius: 50px;
-    background: var(--green);
-    color: white;
-    font-weight: 500;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.rsvp-form button:hover {
-    transform: translateY(-2px);
-    background: #5f735e;
+.mini-card:hover {
+    transform: scale(1.03);
 }
-/* bouton RSVP */
+
+/* RSVP */
 .rsvp-open-btn {
     padding: 14px 28px;
     border: none;
     border-radius: 50px;
     background: var(--green);
     color: white;
-    font-weight: 500;
     cursor: pointer;
-    transition: 0.3s;
-    font-size: 15px;
-}
-
-.rsvp-open-btn:hover {
-    transform: translateY(-2px);
-    background: #5f735e;
 }
 
 /* POPUP */
@@ -332,8 +167,7 @@ footer {
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.35s ease;
-    z-index: 2000;
+    transition: 0.3s;
 }
 
 .rsvp-popup.active {
@@ -343,225 +177,191 @@ footer {
 
 .rsvp-box {
     background: white;
-    padding: 35px;
-    border-radius: 24px;
+    padding: 30px;
+    border-radius: 20px;
     width: 90%;
-    max-width: 520px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-
-    transform: scale(0.85);
-    opacity: 0;
-    transition: all 0.35s ease;
+    max-width: 500px;
+    transform: scale(0.9);
+    transition: 0.3s;
 }
 
 .rsvp-popup.active .rsvp-box {
     transform: scale(1);
-    opacity: 1;
 }
 
 .rsvp-close {
     float: right;
     cursor: pointer;
-    font-size: 22px;
-    opacity: 0.6;
-    transition: 0.3s;
 }
 
-.rsvp-close:hover {
-    opacity: 1;
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 70px;
+    background: #e9ece6;
 }
-</style>
+    </style>
 </head>
 
 <body>
 
 <!-- NAV -->
 <nav>
-    <ul>
-        <li><a href="#histoire">Notre histoire</a></li>
-        <li><a href="#compte">Compte à rebours</a></li>
-        <li><a href="#jour">Le grand jour</a></li>
-        <li><a href="#rsvp">RSVP</a></li>
-        <li><a href="#faq">FAQ</a></li>
-    </ul>
+<ul>
+<li><a href="#histoire">Histoire</a></li>
+<li><a href="#compte">Compte</a></li>
+<li><a href="#jour">Jour J</a></li>
+<li><a href="#rsvp">RSVP</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-    <div class="hero-content">
-        <h1>Laure & Alex</h1>
-        <p>23 octobre 2027</p>
-        <p>Une journée remplie d’amour, de rires et de souvenirs…</p>
-        <a class="btn" href="#histoire">Découvrir notre journée</a>
-    </div>
+<div class="hero-content">
+<h1>Laure & Alex</h1>
+<p>23 octobre 2027</p>
+<a class="btn" href="#histoire">Découvrir</a>
+</div>
 </div>
 
 <!-- HISTOIRE -->
 <div class="section" id="histoire">
-    <div class="card">
-        <h2>💚 Notre histoire</h2>
-        <p>
-            Tout a commencé par une rencontre…<br><br>
-            Puis des fous rires, des voyages, des projets, trois chats adorables 🐱🐱🐱 et aujourd’hui une évidence :<br><br>
-            <strong>se dire Oui.</strong>
-        </p>
-    </div>
+<div class="card">
+<h2>💚 Notre histoire</h2>
+<p>Deux chemins qui se sont croisés, des rires, des voyages, des chats un peu trop sûrs d’eux 🐱… et aujourd’hui une évidence : se dire oui.</p>
+</div>
 </div>
 
-<!-- COMPTE À REBOURS -->
+<!-- COMPTE -->
 <div class="section" id="compte">
-    <div class="card">
-        <h2>⏳ Compte à rebours</h2>
+<div class="card">
+<h2>⏳ Compte à rebours</h2>
 
-     <div class="countdown">
-    <div><strong id="days">0</strong><br>jours</div>
-    <div><strong id="hours">0</strong><br>heures</div>
-    <div><strong id="minutes">0</strong><br>minutes</div>
-    <div><strong id="seconds">0</strong><br>secondes</div>
-</div>
-    </div>
+<div class="countdown">
+<div><strong id="days">0</strong><br>jours</div>
+<div><strong id="hours">0</strong><br>heures</div>
+<div><strong id="minutes">0</strong><br>min</div>
+<div><strong id="seconds">0</strong><br>sec</div>
 </div>
 
-<!-- GRAND JOUR -->
+</div>
+</div>
+
+<!-- JOUR J -->
 <div class="section" id="jour">
-    <div class="card">
-        <h2>📅 Le grand jour</h2>
+<div class="card">
+<h2>📅 Le grand jour</h2>
 
-        <div class="grid">
-            <div class="mini-card">🌿 Programme</div>
-            <div class="mini-card">🍸 Les bars</div>
-            <div class="mini-card">📍 Lieu (à venir)</div>
-            <div class="mini-card">🎁 Infos pratiques</div>
-        </div>
-    </div>
+<div class="grid">
+<div class="mini-card" onclick="openCard('programme')">🌿 Programme</div>
+<div class="mini-card" onclick="openCard('bars')">🍸 Bars</div>
+<div class="mini-card" onclick="openCard('lieu')">📍 Lieu</div>
+<div class="mini-card" onclick="openCard('infos')">🎁 Infos</div>
+</div>
+
+</div>
 </div>
 
 <!-- RSVP -->
 <div class="section" id="rsvp">
-    <div class="card" style="text-align:center;">
-        <h2>💌 RSVP</h2>
-        <p>Nous avons hâte de vous compter parmi nous 💚</p>
-
-        <button class="rsvp-open-btn">Je confirme ma présence</button>
-    </div>
+<div class="card" style="text-align:center;">
+<h2>💌 RSVP</h2>
+<button class="rsvp-open-btn">Je confirme ma présence</button>
+</div>
 </div>
 
+<!-- FAQ -->
+<div class="section" id="faq">
+<div class="card">
+<h2>❓ FAQ</h2>
+<p><strong>Tenue ?</strong> Chic automnal 💚</p>
+<p><strong>Enfants ?</strong> Oui</p>
+</div>
+</div>
 
-<!-- FIN -->
+<!-- FOOTER -->
 <footer>
-    <p>Merci de faire partie de cette aventure 💚</p>
-    <p>Laure & Alex</p>
+Laure & Alex 💚
 </footer>
 
-<script>
-window.addEventListener("load", function () {
-
-    // COUNTDOWN
-    function countdown() {
-        const weddingDate = new Date("2027-10-23T00:00:00").getTime();
-        const now = new Date().getTime();
-        const diff = weddingDate - now;
-
-        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        document.getElementById("minutes").innerText = Math.floor((diff / (1000 * 60)) % 60);
-        document.getElementById("seconds").innerText = Math.floor((diff / 1000) % 60);
-    }
-
-    countdown();
-    setInterval(countdown, 1000);
-
-    // SCROLL ANIMATION FIXÉE
-    const sections = document.querySelectorAll(".section");
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-
-    sections.forEach(s => observer.observe(s));
-
-    // force affichage des sections visibles au chargement
-    setTimeout(() => {
-        sections.forEach(s => {
-            const rect = s.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
-                s.classList.add("visible");
-            }
-        });
-    }, 200);
-
-});
-</script>
-
-</script>
-document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    alert("Merci 💚 Votre réponse a bien été prise en compte !");
-    this.reset();
-});
-</script>
+<!-- POPUP RSVP -->
 <div class="rsvp-popup" id="rsvpPopup">
-    <div class="rsvp-box">
-        <span class="rsvp-close" id="closePopup">✕</span>
+<div class="rsvp-box">
+<span class="rsvp-close" id="closePopup">✕</span>
 
-        <h2>💌 RSVP</h2>
+<h2>RSVP</h2>
 
-        <form class="rsvp-form">
-            <input type="text" placeholder="Nom & prénom" required>
+<form class="rsvp-form">
+<input type="text" placeholder="Nom" required>
+<select required>
+<option>Présent</option>
+<option>Absent</option>
+</select>
+<button type="submit">Envoyer</button>
+</form>
 
-            <select required>
-                <option value="">Votre réponse</option>
-                <option>Je serai présent(e) 🎉</option>
-                <option>Je ne pourrai pas venir 💔</option>
-            </select>
-
-            <textarea placeholder="Un petit mot 💚"></textarea>
-
-            <button type="submit">Envoyer</button>
-        </form>
-    </div>
 </div>
+</div>
+
+<!-- POPUP INFO -->
+<div class="rsvp-popup" id="infoPopup">
+<div class="rsvp-box">
+<span class="rsvp-close" onclick="closeCard()">✕</span>
+<h2 id="popupTitle"></h2>
+<p id="popupText"></p>
+</div>
+</div>
+
 <script>
+// COUNTDOWN
+function countdown() {
+const d = new Date("2027-10-23").getTime();
+const n = new Date().getTime();
+const diff = d - n;
+
+document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24));
+document.getElementById("hours").innerText = Math.floor(diff / (1000*60*60)%24);
+document.getElementById("minutes").innerText = Math.floor(diff / (1000*60)%60);
+document.getElementById("seconds").innerText = Math.floor(diff / 1000 % 60);
+}
+setInterval(countdown,1000);
+countdown();
+
+// SCROLL
+const sections = document.querySelectorAll(".section");
+const observer = new IntersectionObserver((e)=>{
+e.forEach(x=>x.isIntersecting && x.target.classList.add("visible"));
+},{threshold:0.2});
+sections.forEach(s=>observer.observe(s));
+
+// RSVP
 const popup = document.getElementById("rsvpPopup");
-const openBtn = document.querySelector(".rsvp-open-btn");
-const closeBtn = document.getElementById("closePopup");
+document.querySelector(".rsvp-open-btn").onclick=()=>popup.classList.add("active");
+document.getElementById("closePopup").onclick=()=>popup.classList.remove("active");
 
-// ouvrir popup
-openBtn.addEventListener("click", () => {
-    popup.classList.add("active");
-    document.body.style.overflow = "hidden"; // bloque scroll
-});
+// CARDS
+function openCard(type){
+const p=document.getElementById("infoPopup");
+const t=document.getElementById("popupTitle");
+const x=document.getElementById("popupText");
 
-// fermer popup
-function closePopup() {
-    popup.classList.remove("active");
-    document.body.style.overflow = "auto";
+if(type=="programme"){t.innerText="Programme";x.innerText="Cérémonie + soirée";}
+if(type=="bars"){t.innerText="Bars";x.innerText="Cocktails & gourmandises";}
+if(type=="lieu"){t.innerText="Lieu";x.innerText="Domaine du Bois Saint Mard";}
+if(type=="infos"){t.innerText="Infos";x.innerText="Tenue chic automne";}
+
+p.classList.add("active");
+}
+function closeCard(){
+document.getElementById("infoPopup").classList.remove("active");
 }
 
-closeBtn.addEventListener("click", closePopup);
-
-// clic dehors
-popup.addEventListener("click", (e) => {
-    if (e.target === popup) {
-        closePopup();
-    }
-});
-
-// submit formulaire
-document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    alert("Merci 💚 Votre réponse a bien été enregistrée !");
-    
-    this.reset();
-    closePopup();
+// RSVP submit
+document.querySelector(".rsvp-form").addEventListener("submit",e=>{
+e.preventDefault();
+alert("Merci 💚");
+popup.classList.remove("active");
 });
 </script>
 
