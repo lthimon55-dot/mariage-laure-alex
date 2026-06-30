@@ -200,6 +200,40 @@ footer {
     padding: 70px;
     background: #e9ece6;
 }
+
+.faq-item {
+    margin-bottom: 12px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.7);
+}
+
+.faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 16px;
+    border: none;
+    background: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--green-dark);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    transition: 0.4s ease;
+    font-size: 14px;
+    color: #444;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 0 16px 16px 16px;
+}
     </style>
 </head>
 
@@ -229,7 +263,14 @@ footer {
 <div class="section" id="histoire">
 <div class="card">
 <h2>💚 Notre histoire</h2>
-<p>Deux chemins qui se sont croisés, des rires, des voyages, des chats un peu trop sûrs d’eux 🐱… et aujourd’hui une évidence : se dire oui.</p>
+<p>Tout a commencé par une rencontre simple, presque évidente.<br><br>
+
+Puis sont venus les rires, les projets, les voyages, les moments du quotidien… et une vie à construire à deux.<br><br>
+
+Aujourd’hui, entourés de nos trois chats 🐱🐱🐱, on s’est rendu compte d’une chose essentielle :<br><br>
+
+<strong>on veut continuer cette histoire ensemble, pour toujours.</strong>
+</p>
 </div>
 </div>
 
@@ -254,7 +295,8 @@ footer {
 <h2>📅 Le grand jour</h2>
 
 <div class="grid">
-<div class="mini-card" onclick="openCard('programme')">🌿 Programme</div>
+<div class="mini-card" onclick="openCard('programme')">🌿Programe
+</div>
 <div class="mini-card" onclick="openCard('bars')">🍸 Bars</div>
 <div class="mini-card" onclick="openCard('lieu')">📍 Lieu</div>
 <div class="mini-card" onclick="openCard('infos')">🎁 Infos</div>
@@ -267,7 +309,8 @@ footer {
 <div class="section" id="rsvp">
 <div class="card" style="text-align:center;">
 <h2>💌 RSVP</h2>
-<button class="rsvp-open-btn">Je confirme ma présence</button>
+<button class="rsvp-open-btn">Votre présence compte énormément pour nous.<br>
+Merci de nous dire si vous serez avec nous pour célébrer cette journée 💚</button>
 </div>
 </div>
 
@@ -275,10 +318,44 @@ footer {
 <div class="section" id="faq">
 <div class="card">
 <h2>❓ FAQ</h2>
-<p><strong>Tenue ?</strong> Chic automnal 💚</p>
-<p><strong>Enfants ?</strong> Oui</p>
+
+<div class="faq-item">
+    <button class="faq-question">Chaussures de secours ?</button>
+    <div class="faq-answer">
+        Si vos chaussures commencent à devenir inconfortables, pas de panique 💚 des chaussures de secours seront à votre disposition.
+    </div>
 </div>
+
+<div class="faq-item">
+    <button class="faq-question">Tenue ?</button>
+    <div class="faq-answer">
+        Une tenue chic et automnale 💚
+    </div>
 </div>
+
+<div class="faq-item">
+    <button class="faq-question">Couleurs automnales ?</button>
+    <div class="faq-answer">
+        Orange, marron, beige, jaune, rouge foncé, bordeaux… 🍂
+    </div>
+</div>
+
+<div class="faq-item">
+    <button class="faq-question">Enfants ?</button>
+    <div class="faq-answer">
+        Oui, ils sont les bienvenus 💚
+    </div>
+</div>
+
+<div class="faq-item">
+    <button class="faq-question">Repas végétarien ?</button>
+    <div class="faq-answer">
+        Nous proposerons des alternatives adaptées ainsi qu’un assortiment d’accompagnements pour satisfaire tous les goûts 💚
+    </div>
+</div>
+
+</div>
+
 
 <!-- FOOTER -->
 <footer>
@@ -346,10 +423,10 @@ const p=document.getElementById("infoPopup");
 const t=document.getElementById("popupTitle");
 const x=document.getElementById("popupText");
 
-if(type=="programme"){t.innerText="Programme";x.innerText="Cérémonie + soirée";}
-if(type=="bars"){t.innerText="Bars";x.innerText="Cocktails & gourmandises";}
-if(type=="lieu"){t.innerText="Lieu";x.innerText="Domaine du Bois Saint Mard";}
-if(type=="infos"){t.innerText="Infos";x.innerText="Tenue chic automne";}
+if(type=="programme"){t.innerText="Programme";x.innerText="Le déroulé de cette journée unique";}
+if(type=="bars"){t.innerText="Bars";x.innerText="Des espaces gourmands et festifs à découvrir tout au long de la journée";}
+if(type=="lieu"){t.innerText="Lieu";x.innerText="Le lieu est encore en cours de finalisation, mais nous avons hâte de vous y accueillir dans un cadre chaleureux et plein de charme 💚";}
+if(type=="infos"){t.innerText="Infos";x.innerText="Tout ce qu’il faut savoir pour profiter pleinement de cette journée avec nous";}
 
 p.classList.add("active");
 }
@@ -362,6 +439,23 @@ document.querySelector(".rsvp-form").addEventListener("submit",e=>{
 e.preventDefault();
 alert("Merci 💚");
 popup.classList.remove("active");
+});
+</script>
+<script>
+document.querySelectorAll(".faq-question").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const item = btn.parentElement;
+
+        // toggle open/close
+        item.classList.toggle("active");
+
+        // option bonus : fermer les autres
+        document.querySelectorAll(".faq-item").forEach(other => {
+            if (other !== item) {
+                other.classList.remove("active");
+            }
+        });
+    });
 });
 </script>
 
