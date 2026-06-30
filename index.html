@@ -1,90 +1,349 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Laure & Alex - Mariage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laure & Alex</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Georgia, serif;
-    background: linear-gradient(135deg, #f6f4ef, #e8efe6);
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    --green: #6b7f6a;
+    --green-dark: #2f3b2f;
+    --cream: #f7f5f0;
+    --white: #ffffff;
+    --shadow: 0 20px 60px rgba(0,0,0,0.08);
+    --radius: 22px;
 }
 
+/* BASE */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--green-dark);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(14px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 16px;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--green-dark);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+/* HERO */
 .hero {
     height: 100vh;
-   background: url("images/couple.jpg") center center/cover no-repeat;
+    background: url("images/couple.jpg") center center/cover no-repeat;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
-.overlay {
+/* overlay premium */
+.hero::before {
+    content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.45);
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.6)
+    );
 }
 
-.content {
+.hero-content {
     position: relative;
-    text-align: center;
     color: white;
-}
-
-h1 {
-    font-size: 60px;
-    margin: 0;
-}
-
-p {
-    font-size: 20px;
-}
-
-a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #d8cfc4;
-    color: #2f3b2f;
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: bold;
-}
-
-a:hover {
-    background: #cbbfb0;
-}
-
-.section {
     max-width: 700px;
-    margin: 60px auto;
-    background: white;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.btn {
+    margin-top: 25px;
+    display: inline-block;
+    padding: 12px 26px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.25);
+}
+
+/* SECTIONS */
+.section {
+    padding: 110px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* CARD PREMIUM */
+.card {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
     padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.6);
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* TITRES */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+/* HISTOIRE */
+.card p {
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+/* COUNTDOWN */
+<div class="countdown">
+    <div><strong id="days">0</strong><br>jours</div>
+    <div><strong id="hours">0</strong><br>heures</div>
+    <div><strong id="minutes">0</strong><br>minutes</div>
+    <div><strong id="seconds">0</strong><br>secondes</div>
+</div>
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* MINI CARDS */
+.mini-card {
+    background: rgba(255,255,255,0.9);
+    padding: 26px;
+    border-radius: 18px;
     text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.mini-card:hover {
+    transform: translateY(-6px);
+    background: white;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 80px 20px;
+    background: #e9ece6;
+    font-size: 16px;
+}
+
+/* ANIMATIONS (scroll reveal simple) */
+.section {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s forwards;
+}
+
+.section:nth-child(odd) { animation-delay: 0.2s; }
+.section:nth-child(even) { animation-delay: 0.4s; }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .countdown {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
+<nav>
+    <ul>
+        <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#compte">Compte à rebours</a></li>
+        <li><a href="#jour">Le grand jour</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="#faq">FAQ</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
 <div class="hero">
-    <div class="overlay"></div>
-    <div class="content">
-        <h1>💚 Laure & Alex</h1>
-        <p>On se marie bientôt ✨</p>
-        <a href="rsvp.html">💌 Répondre à l’invitation</a>
+    <div class="hero-content">
+        <h1>Laure & Alex</h1>
+        <p>23 octobre 2027</p>
+        <p>Une journée remplie d’amour, de rires et de souvenirs…</p>
+        <a class="btn" href="#histoire">Découvrir notre histoire</a>
     </div>
 </div>
 
-<div class="section">
-    <h2>🌿 Une journée d’amour</h2>
-    <p>Un moment simple, chaleureux, entouré de nos proches.</p>
-    <p><strong>Nous avons hâte de vous voir 💚</strong></p>
+<!-- HISTOIRE -->
+<div class="section" id="histoire">
+    <div class="card">
+        <h2>💚 Notre histoire</h2>
+        <p>
+            Tout a commencé par une rencontre…<br><br>
+            Puis des fous rires, des voyages, des projets, trois chats adorables 🐱🐱🐱 et aujourd’hui une évidence :<br><br>
+            <strong>se dire Oui.</strong>
+        </p>
+    </div>
 </div>
+
+<!-- COMPTE À REBOURS -->
+<div class="section" id="compte">
+    <div class="card">
+        <h2>⏳ Compte à rebours</h2>
+
+        <div class="countdown">
+            <div><strong>125</strong><br>jours</div>
+            <div><strong>14</strong><br>heures</div>
+            <div><strong>32</strong><br>minutes</div>
+            <div><strong>18</strong><br>secondes</div>
+        </div>
+    </div>
+</div>
+
+<!-- GRAND JOUR -->
+<div class="section" id="jour">
+    <div class="card">
+        <h2>📅 Le grand jour</h2>
+
+        <div class="grid">
+            <div class="mini-card">🌿 Programme</div>
+            <div class="mini-card">🍸 Les bars</div>
+            <div class="mini-card">📍 Lieu (à venir)</div>
+            <div class="mini-card">🎁 Infos pratiques</div>
+        </div>
+    </div>
+</div>
+
+<!-- RSVP -->
+<div class="section" id="rsvp">
+    <div class="card" style="text-align:center;">
+        <h2>💌 RSVP</h2>
+        <a class="btn" href="rsvp.html">Je confirme ma présence</a>
+    </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" id="faq">
+    <div class="card">
+        <h2>❓ FAQ</h2>
+
+        <p><strong>Comment s'habiller ?</strong><br>
+        Tenue chic et décontractée aux couleurs de l’automne.</p>
+
+        <p><strong>Puis-je venir avec mes enfants ?</strong><br>
+        Oui 💚</p>
+
+        <p><strong>Où dormir ?</strong><br>
+        Informations à venir.</p>
+    </div>
+</div>
+
+<!-- FIN -->
+<footer>
+    <p>Merci de faire partie de cette aventure 💚</p>
+    <p>Laure & Alex</p>
+</footer>
+
+<script>
+function countdown() {
+    const weddingDate = new Date("2027-10-23T00:00:00").getTime();
+
+    const now = new Date().getTime();
+    const diff = weddingDate - now;
+
+    if (diff <= 0) return;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+countdown();
+setInterval(countdown, 1000);
+</script>
 
 </body>
 </html>
