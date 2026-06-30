@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Admin - Mariage</title>
+
+<style>
+body {
+    font-family: Georgia;
+    background: #f6f4ef;
+    padding: 30px;
+}
+
+h1 {
+<div style="text-align:center; margin:15px;">
+  <button onclick="filterAll()">Tous</button>
+  <button onclick="filterYes()">Oui</button>
+  <button onclick="filterNo()">Non</button>
+</div>
+    text-align: center;
+    color: #2f3b2f;
+}
+
+<style>
+body {
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #f6f4ef, #e8efe6);
+    padding: 30px;
+    color: #2f3b2f;
+}
+
+h1 {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+#stats {
+    text-align: center;
+    margin: 20px;
+    font-size: 18px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+button {
+    background: #2f3b2f;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3e4f3e;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+th {
+    background: #2f3b2f;
+    color: white;
+    padding: 12px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+tr:hover {
+    background: #f3f6f3;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Tableau des invités</h1>
+<div id="stats" style="
+    text-align:center;
+    margin:15px;
+    font-size:18px;
+    color:#2f3b2f;
+"></div>
+<table>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Présence</th>
+<th>Adultes</th>
+<th>Enfants</th>
+<th>Allergies</th>
+<th>Message</th>
+</tr>
+</thead>
+
+<tbody id="table"></tbody>
+</table>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDafb5Zk4pTr_px3K9yvvAxN9QkFxbaUaA",
+  authDomain: "mariage-laure-alex.firebaseapp.com",
+  projectId: "mariage-laure-alex",
+  storageBucket: "mariage-laure-alex.firebasestorage.app",
+  messagingSenderId: "80820632891",
+  appId: "1:80820632891:web:f37cad8084029fadbb8b1e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let allData = [];
+
+const table = document.getElementById("table");
+
+function render(data) {
+
+  let total = 0;
+  let oui = 0;
+  let non = 0;
+  let repas = 0;
+
+  table.innerHTML = "";
+
+  data.forEach((d) => {
+    total++;
+
+  const isYes = d.presence && d.presence.toLowerCase().includes("oui");
+
+if (isYes) {
+  oui++;
+  repas += (Number(d.adultes) || 0) + (Number(d.enfants) || 0);
+}
+    if (d.presence && d.presence.includes("Non")) non++;
+
+    table.innerHTML += `
+      <tr>
+        <td>${d.nom || ""}</td>
+        <td>${d.presence || ""}</td>
+        <td>${d.adultes || ""}</td>
+        <td>${d.enfants || ""}</td>
+        <td>${d.allergies || ""}</td>
+        <td>${d.message || ""}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("stats").innerHTML = `
+    <p><strong>Total invités :</strong> ${total}</p>
+    <p><strong>Oui :</strong> ${oui}</p>
+    <p><strong>Non :</strong> ${non}</p>
+    <p><strong>Repas à prévoir :</strong> ${repas}</p>
+  `;
+}
+
+// LIVE DATA
+onSnapshot(collection(db, "invites"), (snapshot) => {
+  allData = snapshot.docs.map(doc => doc.data());
+  render(allData);
+});
+
+// FILTRES
+window.filterAll = () => render(allData);
+
+window.filterYes = () => {
+  render(allData.filter(d => d.presence?.includes("Oui")));
+};
+
+window.filterNo = () => {
+  render(allData.filter(d => d.presence?.includes("Non")));
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>RSVP - Laure & Alex</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #f6f4ef, #e8efe6);
+}
+
+.hero {
+    height: 35vh;
+    background: url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+}
+
+.hero h1 {
+    position: relative;
+    color: white;
+    font-size: 40px;
+}
+
+.container {
+    max-width: 700px;
+    margin: -40px auto 60px;
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.subtitle {
+    text-align: center;
+    color: #556b55;
+    margin-bottom: 25px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-family: Georgia;
+    font-size: 14px;
+}
+
+label {
+    font-size: 14px;
+    color: #2f3b2f;
+    margin-top: 10px;
+    display: block;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #2f3b2f;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #3e4f3e;
+}
+
+.note {
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <div class="overlay"></div>
+    <h1>💌 RSVP</h1>
+</div>
+
+<div class="container">
+
+    <p class="subtitle">
+        Merci de répondre pour que nous puissions organiser ce jour avec amour 💚
+    </p>
+
+    <label>Nom et prénom</label>
+    <input placeholder="Votre nom">
+
+    <label>Présence</label>
+    <select>
+        <option>Je choisis…</option>
+        <option>Oui je viens 💚</option>
+        <option>Non je ne peux pas</option>
+    </select>
+
+    <label>Nombre d’adultes</label>
+    <input type="number">
+
+    <label>Nombre d’enfants</label>
+    <input type="number">
+
+    <label>Pointures (pour les chaussures confort)</label>
+    <textarea></textarea>
+
+    <label>Allergies / régimes alimentaires</label>
+    <textarea></textarea>
+
+    <label>Infos importantes</label>
+    <textarea></textarea>
+
+    <label>Un petit mot pour nous 💚</label>
+    <textarea></textarea>
+
+    <button onclick="saveRSVP()">Envoyer 💌</button>
+
+    <p class="note">Vos réponses nous aident énormément à organiser notre journée ✨</p>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDafb5Zk4pTr_px3K9yvvAxN9QkFxbaUaA",
+  authDomain: "mariage-laure-alex.firebaseapp.com",
+  projectId: "mariage-laure-alex",
+  storageBucket: "mariage-laure-alex.firebasestorage.app",
+  messagingSenderId: "80820632891",
+  appId: "1:80820632891:web:f37cad8084029fadbb8b1e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.saveRSVP = async function () {
+
+    const i = document.querySelectorAll("input");
+    const s = document.querySelectorAll("select");
+    const t = document.querySelectorAll("textarea");
+
+    await addDoc(collection(db, "invites"), {
+        nom: i[0].value,
+        presence: s[0].value,
+        adultes: i[1].value,
+        enfants: i[2].value,
+        pointures: t[0].value,
+        allergies: t[1].value,
+        infos: t[2].value,
+        message: t[3].value,
+        date: new Date()
+    });
+
+    alert("💚 Merci ! Votre réponse a bien été enregistrée.");
+};
+</script>
+
+</body>
+</html>
