@@ -120,11 +120,18 @@ nav a:hover {
 
 /* SECTIONS */
 .section {
-    padding: 110px 20px;
-    max-width: 1000px;
-    margin: auto;
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(8px);
+    transition: all 0.9s ease;
+    will-change: transform, opacity, filter;
 }
 
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
 /* CARD PREMIUM */
 .card {
     background: rgba(255,255,255,0.8);
@@ -449,71 +456,50 @@ footer {
 <script>
 window.addEventListener("load", function () {
 
+    // COUNTDOWN
     function countdown() {
         const weddingDate = new Date("2027-10-23T00:00:00").getTime();
         const now = new Date().getTime();
         const diff = weddingDate - now;
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("days").innerText = days;
-        document.getElementById("hours").innerText = hours;
-        document.getElementById("minutes").innerText = minutes;
-        document.getElementById("seconds").innerText = seconds;
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        document.getElementById("minutes").innerText = Math.floor((diff / (1000 * 60)) % 60);
+        document.getElementById("seconds").innerText = Math.floor((diff / 1000) % 60);
     }
 
     countdown();
     setInterval(countdown, 1000);
+
+    // SCROLL ANIMATION FIXÉE
+    const sections = document.querySelectorAll(".section");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    sections.forEach(s => observer.observe(s));
+
+    // force affichage des sections visibles au chargement
+    setTimeout(() => {
+        sections.forEach(s => {
+            const rect = s.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                s.classList.add("visible");
+            }
+        });
+    }, 200);
 
 });
 </script>
 
-<script>
-window.addEventListener("load", function () {
-
-    // COUNTDOWN (tu gardes le tien)
-    function countdown() {
-        const weddingDate = new Date("2027-10-23T00:00:00").getTime();
-        const now = new Date().getTime();
-        const diff = weddingDate - now;
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("days").innerText = days;
-        document.getElementById("hours").innerText = hours;
-        document.getElementById("minutes").innerText = minutes;
-        document.getElementById("seconds").innerText = seconds;
-    }
-
-    countdown();
-    setInterval(countdown, 1000);
-
-    // ✨ SCROLL ANIMATION
-    const sections = document.querySelectorAll(".section");
-
-    function revealOnScroll() {
-        const triggerBottom = window.innerHeight * 0.85;
-
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-
-            if (sectionTop < triggerBottom) {
-                section.classList.add("visible");
-            }
-        });
-    }
-
-    window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll(); // activation au chargement
-
-});
-<script>
+</script>
 document.querySelector(".rsvp-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
